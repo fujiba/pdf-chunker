@@ -1,0 +1,33 @@
+name: CI
+
+on:
+    push:
+        branches: [main, master]
+    pull_request:
+        branches: [main, master]
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Setup Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: "3.11"
+
+            - name: Install system dependencies
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y qpdf
+
+            - name: Install package and test deps
+              run: |
+                  python -m pip install --upgrade pip
+                  python -m pip install -e '.[test]'
+
+            - name: Run tests
+              run: |
+                  python -m pytest -q

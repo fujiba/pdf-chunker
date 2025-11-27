@@ -19,5 +19,8 @@ dependencies = [
 [project.scripts]
 pdf-chunker = "pdf_chunker.cli:main"
 
+[project.optional-dependencies]
+test = ["pytest>=7.0", "pytest-cov"]
+
 [tool.setuptools.packages.find]
 exclude = ["output", "output.*"]
