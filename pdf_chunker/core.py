@@ -18,8 +18,7 @@ def get_pdf_size(pdf_obj):
 
 def chunk_pdf(input_path, output_dir=None):
     if not os.path.exists(input_path):
-        print(f"Error: File not found: {input_path}")
-        return False
+        raise FileNotFoundError(f"Error: File not found: {input_path}")
 
     if output_dir is None:
         output_dir = os.path.dirname(input_path) or "."
