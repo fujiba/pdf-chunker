@@ -9,9 +9,9 @@ description = "Small CLI to chunk PDF files and downsample embedded images"
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
-authors = [ { name = "T.Fujiba", email = "you@example.com" } ]
 
-dependencies = [
+authors = [ { name = "T.Fujiba" } ]
+dependencies = [ 
   "pikepdf>=6.0.0",
   "Pillow>=9.0.0"
 ]
