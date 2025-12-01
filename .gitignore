@@ -74,3 +74,5 @@ coverage.xml
 .envrc
 
 /output/
+
+minio_data/
