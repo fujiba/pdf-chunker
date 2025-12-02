@@ -74,6 +74,36 @@ def _detect_jpeg_app_markers(data: bytes):
     return markers
 
 
+# Print table
+def _print_table(headers, rows):
+    # calculate column widths
+    cols = list(zip(*([headers] + rows))) if rows else [[h] for h in headers]
+    widths = [max(len(str(v)) for v in col) for col in cols]
+
+    # decide which columns are numeric and should be right-aligned
+    # Right-align: Page, Width, Height, Size (bytes)
+    numeric_cols = set()
+    for idx, h in enumerate(headers):
+        if h in ("Page", "Width", "Height", "Size (bytes)"):
+            numeric_cols.add(idx)
+
+    # header
+    header_cells = []
+    for idx, (h, w) in enumerate(zip(headers, widths)):
+        header_cells.append(h.rjust(w) if idx in numeric_cols else h.ljust(w))
+    header_line = " | ".join(header_cells)
+    sep_line = "-+-".join("-" * w for w in widths)
+    print(header_line)
+    print(sep_line)
+
+    for r in rows:
+        cells = []
+        for idx, (c, w) in enumerate(zip(r, widths)):
+            s = str(c)
+            cells.append(s.rjust(w) if idx in numeric_cols else s.ljust(w))
+        print(" | ".join(cells))
+
+
 def analyze_pdf_images(pdf_path):
     """指定されたPDFファイル内の全画像情報を抽出して表示する。"""
     if not os.path.exists(pdf_path):
@@ -166,43 +196,6 @@ def analyze_pdf_images(pdf_path):
                 if page_images > 0:
                     # keep a short per-page note in output
                     pass
-
-                # Print table
-                def _print_table(headers, rows):
-                    # calculate column widths
-                    cols = (
-                        list(zip(*([headers] + rows)))
-                        if rows
-                        else [[h] for h in headers]
-                    )
-                    widths = [max(len(str(v)) for v in col) for col in cols]
-
-                    # decide which columns are numeric and should be right-aligned
-                    # Right-align: Page, Width, Height, Size (bytes)
-                    numeric_cols = set()
-                    for idx, h in enumerate(headers):
-                        if h in ("Page", "Width", "Height", "Size (bytes)"):
-                            numeric_cols.add(idx)
-
-                    # header
-                    header_cells = []
-                    for idx, (h, w) in enumerate(zip(headers, widths)):
-                        header_cells.append(
-                            h.rjust(w) if idx in numeric_cols else h.ljust(w)
-                        )
-                    header_line = " | ".join(header_cells)
-                    sep_line = "-+-".join("-" * w for w in widths)
-                    print(header_line)
-                    print(sep_line)
-
-                    for r in rows:
-                        cells = []
-                        for idx, (c, w) in enumerate(zip(r, widths)):
-                            s = str(c)
-                            cells.append(
-                                s.rjust(w) if idx in numeric_cols else s.ljust(w)
-                            )
-                        print(" | ".join(cells))
 
             if rows:
                 _print_table(headers, rows)

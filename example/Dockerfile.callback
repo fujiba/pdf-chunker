@@ -13,7 +13,7 @@ COPY . .
 # Install Python dependencies
 RUN python -m pip install --upgrade pip
 # Install the pdf-chunker package in editable mode, along with its test dependencies
-RUN python -m pip install -e '.[test]'
+RUN python -m pip install -e '.'
 # Install dependencies for the callback server
 RUN python -m pip install "fastapi[all]" boto3 uvicorn
 
