@@ -1,0 +1,23 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies required by pdf-chunker (qpdf)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends qpdf curl && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy the entire project content from the build context (project root)
+COPY . .
+
+# Install Python dependencies
+RUN python -m pip install --upgrade pip
+# Install the pdf-chunker package in editable mode, along with its test dependencies
+RUN python -m pip install -e '.'
+# Install dependencies for the callback server
+RUN python -m pip install "fastapi[all]" boto3 uvicorn
+
+EXPOSE 5001
+WORKDIR /app/example
+# Use uvicorn to run the FastAPI application
+CMD ["uvicorn", "callback_server:app", "--host", "0.0.0.0", "--port", "5001"]

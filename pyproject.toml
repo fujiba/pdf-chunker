@@ -18,6 +18,7 @@ dependencies = [
 
 [project.scripts]
 pdf-chunker = "pdf_chunker.cli:main"
+pdf-image-dumper = "pdf_image_dumper.cli:main"
 
 [project.optional-dependencies]
 test = ["pytest>=7.0", "pytest-cov"]
