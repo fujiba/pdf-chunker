@@ -4,6 +4,14 @@ import pikepdf
 
 logger = logging.getLogger(__name__)
 
+# 壊れたType0フォントのSubtypeとしてよくあるもの
+BROKEN_SUBTYPES = {
+    pikepdf.Name("/CIDFontType0C"),  # FontFile3
+    pikepdf.Name.Image,
+    pikepdf.Name.TrueType,
+    pikepdf.Name.Type0,  # Nested Type0
+}
+
 
 def is_type0_font_broken(font: "pikepdf.Dictionary") -> bool:
     """
@@ -53,12 +61,6 @@ def is_type0_font_broken(font: "pikepdf.Dictionary") -> bool:
                 return True  # BaseFontがないのは壊れてる
 
         # 不正なSubtypeをチェック
-        BROKEN_SUBTYPES = {
-            pikepdf.Name("/CIDFontType0C"),  # FontFile3
-            pikepdf.Name.Image,
-            pikepdf.Name.TrueType,
-            pikepdf.Name.Type0,  # Nested Type0
-        }
         if subtype in BROKEN_SUBTYPES:
             return True
 
@@ -99,8 +101,6 @@ def remove_broken_fonts(page: "pikepdf.Page") -> int:
         削除したフォントの数
     """
     fonts = page.Resources.get("/Font", {})
-    if not hasattr(fonts, "keys"):
-        return 0
 
     broken_fonts = [
         fname for fname, font in fonts.items() if is_type0_font_broken(font)
