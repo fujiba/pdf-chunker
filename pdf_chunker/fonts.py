@@ -5,7 +5,7 @@ import pikepdf
 logger = logging.getLogger(__name__)
 
 
-def is_type0_font_broken(font) -> bool:
+def is_type0_font_broken(font: "pikepdf.Dictionary") -> bool:
     """
     Type0フォントのDescendantFontsが壊れてるか検証。
 
@@ -88,7 +88,7 @@ def is_type0_font_broken(font) -> bool:
     return False
 
 
-def remove_broken_fonts(page) -> int:
+def remove_broken_fonts(page: "pikepdf.Page") -> int:
     """
     ページから壊れたType0フォントを削除する。
 
