@@ -4,6 +4,7 @@ import os
 
 from pikepdf import Pdf
 
+from .fonts import remove_broken_fonts
 from .images import process_page_images
 
 logger = logging.getLogger(__name__)
@@ -82,6 +83,7 @@ def chunk_pdf(
         page = pages[i]
 
         process_page_images(src_pdf, page, max_dim=image_max_dim)
+        remove_broken_fonts(page)
 
         current_chunk.pages.append(page)
         current_size = get_pdf_size(current_chunk)

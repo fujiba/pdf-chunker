@@ -14,6 +14,7 @@ Designed to prepare documents for RAG and LLM context windows (e.g., AWS Bedrock
   * Downsampling: Resizes embedded images to a specified maximum dimension (default: 1500px).  
   * Color Conversion: Converts CMYK images to RGB to prevent display issues (e.g., inverted colors).  
   * Compression: Adjusts JPEG quality to reduce file size.  
+* Remove Corrupted fonts: Removes corrupted fonts created by some software.
 * Callback Support: Hook into the saving process via a callback for direct uploads to S3, databases, etc., without saving chunks to local disk.
 
 ## Requirements
