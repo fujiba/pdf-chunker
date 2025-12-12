@@ -101,7 +101,7 @@ def remove_broken_fonts(page: "pikepdf.Page") -> int:
         削除したフォントの数
     """
     # リソース、フォントがない場合はスキップ
-    if "/Resources" not in page or "/Font" not in page.Resources:
+    if "/Resources" not in page:
         return 0
 
     fonts = page.Resources.get("/Font", {})
