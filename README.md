@@ -1,4 +1,4 @@
-# pdf_chunker
+# llm_pdf_chunker
 
 **LLM-friendly PDF splitting & image optimization tool.**
 

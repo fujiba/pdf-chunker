@@ -1,0 +1,48 @@
+name: Publish to PyPI
+
+on:
+    push:
+        tags:
+            - "v*" # v0.1.0 などのタグがプッシュされたときに実行
+
+jobs:
+    pypi-publish:
+        name: Upload release to PyPI
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            id-token: write # OIDC認証に必須
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.11"
+
+            - name: Install uv
+              uses: astral-sh/setup-uv@v5
+
+            - name: Install dependencies
+              run: uv sync --extra dev
+
+            - name: Set version from tag
+              run: |
+                  # タグ名を取得 (例: refs/tags/v0.1.2 -> 0.1.2)
+                  TAG_NAME=${GITHUB_REF#refs/tags/v}
+                  echo "Version from tag: $TAG_NAME"
+
+                  # pyproject.tomlのversion行を置換
+                  # 注意: 単純な置換なので、toml内に他の version = "..." がないことを前提としています
+                  sed -i "s/^version = \".*\"/version = \"$TAG_NAME\"/" pyproject.toml
+
+                  # 確認用
+                  grep "^version =" pyproject.toml
+
+            - name: Build package
+              run: uv build
+
+            - name: Publish to PyPI
+              uses: pypa/gh-action-pypi-publish@release/v1
