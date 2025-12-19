@@ -1,4 +1,4 @@
-# pdf_chunker
+# llm_pdf_chunker
 
 **LLMフレンドリーなPDF分割＆画像最適化ツール。**
 

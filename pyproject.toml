@@ -3,12 +3,17 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pdf_chunker"
+name = "llm-pdf-chunker"
 version = "0.1.0"
-description = "Small CLI to chunk PDF files and downsample embedded images"
+description = "LLM-friendly PDF splitter & image optimizer. Chunk PDFs by size and downsample images for RAG/Bedrock."
 readme = "README.md"
 requires-python = ">=3.11"
-license = "MIT"
+license = { file = "LICENSE" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
 
 authors = [ { name = "T.Fujiba" } ]
 dependencies = [ 
@@ -16,12 +21,16 @@ dependencies = [
   "Pillow>=9.0.0"
 ]
 
+[project.urls]
+Repository = "https://github.com/fujiba/pdf-chunker"
+
 [project.scripts]
-pdf-chunker = "pdf_chunker.cli:main"
+llm-pdf-chunker = "pdf_chunker.cli:main"
 pdf-image-dumper = "pdf_image_dumper.cli:main"
 
 [project.optional-dependencies]
 test = ["pytest>=7.0", "pytest-cov"]
+dev = ["twine"]
 
 [tool.setuptools.packages.find]
 exclude = ["output", "output.*"]
