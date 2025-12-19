@@ -4,7 +4,7 @@ ifneq (,$(wildcard .env))
     export
 endif
 
-.PHONY: build publish-test publish
+.PHONY: build publish-test publish clean
 
 build:
 	uv build
@@ -18,3 +18,6 @@ publish-test: build
 # 環境変数 PYPI_TOKEN を使用
 publish: build
 	TWINE_USERNAME=__token__ TWINE_PASSWORD=$(PYPI_TOKEN) uv run twine upload dist/*
+
+clean:
+	rm -rf dist/ build/ ./*.egg-info
