@@ -25,7 +25,7 @@ dependencies = [
 Repository = "https://github.com/fujiba/pdf-chunker"
 
 [project.scripts]
-pdf-chunker = "pdf_chunker.cli:main"
+llm-pdf-chunker = "pdf_chunker.cli:main"
 pdf-image-dumper = "pdf_image_dumper.cli:main"
 
 [project.optional-dependencies]
