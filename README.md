@@ -1,4 +1,4 @@
-# llm_pdf_chunker
+# llm-pdf-chunker
 
 **LLM-friendly PDF splitting & image optimization tool.**
 
@@ -32,13 +32,13 @@ uv lock
 uv sync
 
 # Run via CLI  
-uv run pdf-chunker input.pdf --out-dir output
+uv run llm-pdf-chunker input.pdf --out-dir output
 ```
 
 ## CLI Usage
 
 ```sh
-usage: pdf-chunker [-h] [--max-size MAX_SIZE] [--image-max-dim IMAGE_MAX_DIM] input_pdf [output_dir]
+usage: llm-pdf-chunker [-h] [--max-size MAX_SIZE] [--image-max-dim IMAGE_MAX_DIM] input_pdf [output_dir]
 
 Split large PDFs into smaller chunks
 
@@ -57,7 +57,7 @@ Example:
 Split into 10MB chunks and resize images to 2000px on the longest side.  
 
 ```sh
-pdf-chunker input.pdf --max-size 10.0 --image-max-dim 2000
+llm-pdf-chunker input.pdf --max-size 10.0 --image-max-dim 2000
 ```
 
 ## Image Analysis Tool (pdf-image-dumper)
@@ -83,7 +83,7 @@ pdf-image-dumper input.pdf
 ### Basic Usage
 
 ```python
-from pdf_chunker import chunk_pdf
+from llm-pdf-chunker import chunk_pdf
 
 # Split input.pdf into chunks in the 'output' directory  
 chunk_pdf(  
@@ -100,7 +100,7 @@ By providing a save_callback, you can receive the split PDF objects (pikepdf.Pdf
 
 ```python
 import io  
-from pdf_chunker import chunk_pdf
+from llm-pdf-chunker import chunk_pdf
 
 def upload_to_s3(pdf_obj, filename):  
     # Convert pikepdf object to bytes  
