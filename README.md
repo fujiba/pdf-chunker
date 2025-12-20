@@ -83,7 +83,7 @@ pdf-image-dumper input.pdf
 ### Basic Usage
 
 ```python
-from llm-pdf-chunker import chunk_pdf
+from pdf_chunker import chunk_pdf
 
 # Split input.pdf into chunks in the 'output' directory  
 chunk_pdf(  
@@ -100,7 +100,7 @@ By providing a save_callback, you can receive the split PDF objects (pikepdf.Pdf
 
 ```python
 import io  
-from llm-pdf-chunker import chunk_pdf
+from pdf_chunker import chunk_pdf
 
 def upload_to_s3(pdf_obj, filename):  
     # Convert pikepdf object to bytes  

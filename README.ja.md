@@ -72,7 +72,7 @@ pdf-image-dumper input.pdf
 ### 基本的な使い方
 
 ```python
-from llm-pdf-chunker import chunk_pdf
+from pdf_chunker import chunk_pdf
 
 # input.pdf を分割して output ディレクトリに保存  
 chunk_pdf(  
@@ -89,7 +89,7 @@ save_callback を指定することで、ファイルシステムに保存する
 
 ```python
 import io  
-from llm-pdf-chunker import chunk_pdf
+from pdf_chunker import chunk_pdf
 
 def upload_to_s3(pdf_obj, filename):  
     # pikepdfオブジェクトをバイト列に変換  
