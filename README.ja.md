@@ -1,4 +1,4 @@
-# llm_pdf_chunker
+# llm-pdf-chunker
 
 **LLMフレンドリーなPDF分割＆画像最適化ツール。**
 
@@ -33,20 +33,20 @@ uv lock
 uv sync
 
 # CLIで実行  
-uv run pdf-chunker input.pdf --out-dir output
+uv run llm-pdf-chunker input.pdf --out-dir output
 ```
 
 ## CLIの使い方
 
 ```text
-usage: pdf-chunker [-h] [--max-size MAX_SIZE] [--image-max-dim IMAGE_MAX_DIM] input_pdf [output_dir]
+usage: llm-pdf-chunker [-h] [--max-size MAX_SIZE] [--image-max-dim IMAGE_MAX_DIM] input_pdf [output_dir]
 ```
 
 例:  
 10MBごとに分割し、画像は長辺2000pxにリサイズする場合  
 
 ```sh
-pdf-chunker input.pdf --max-size 10.0 --image-max-dim 2000
+llm-pdf-chunker input.pdf --max-size 10.0 --image-max-dim 2000
 ```
 
 ## 画像解析ツール (pdf-image-dumper)
